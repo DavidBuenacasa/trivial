@@ -1,0 +1,36 @@
+<div id="login">
+
+    <div class="wrapper">
+
+
+        <div class="inner">
+            <img src="assets/img/image-1.png" alt="" class="image-1">
+            <form action="" #miFormulario="ngForm" (ngSubmit)="login(miFormulario)">
+                <h3>Iniciar Sesion</h3>
+                <div class="form-holder">
+                    <span class="lnr lnr-user"></span>
+                    <input type="text" class="form-control" placeholder="Correo electronico" name="email" ngModel>
+                </div>
+                <div class="form-holder">
+                    <span class="lnr lnr-lock"></span>
+                    <input type="password" class="form-control" placeholder="Contraseña" name="password" ngModel>
+                </div>
+                <button id="button-init">
+                    <span>Iniciar sesion</span>
+                </button>
+
+                <a class="justify-content-center d-flex mt-4" href="">
+                    <img src="assets/icon/home-40.svg">
+                </a>
+            </form>
+            <img src="assets/img/image-2.png" alt="" class="image-2">
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+

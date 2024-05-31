@@ -1,0 +1,67 @@
+<div class="area">
+
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    
+</div>
+
+
+<div class="time-bar container-fluid" [style.display]="displayGame">
+    <img src="assets/icon/reloj-de-arena.png" id="time">
+    
+    <div class="round-time-bar container" data-style="smooth" style="--duration: 30;">
+        <div></div>
+    </div>
+    <div id="timer">
+        {{displayTimer}}
+    </div>
+    <div id="puntuacion">
+        
+        <img src="assets/icon/trofeo.png" id="trofeo">
+        <p id="puntos">{{puntuacion}}</p>
+    </div>
+</div>
+
+
+<div class="quiz-container container" [style.display]="displayGame">
+    <h1>{{title}}</h1>
+    <h2>{{pregunta}}</h2>
+    <div class="options mt-3 mb-4">
+        <button type="button" class="btn btn-primary btn-rounded button" data-mdb-ripple-init (click)="preguntaClicked($event)" [value]="opcion1">{{opcion1}}</button>
+        <button type="button" class="btn btn-secondary btn-rounded button" data-mdb-ripple-init (click)="preguntaClicked($event)" [value]="opcion2">{{opcion2}}</button>
+        <button type="button" class="btn btn-success btn-rounded " data-mdb-ripple-init (click)="preguntaClicked($event)" [value]="opcion3">{{opcion3}}</button>
+        <button type="button" class="btn btn-warning btn-rounded " data-mdb-ripple-init (click)="preguntaClicked($event)" [value]="opcion4">{{opcion4}}</button>
+    </div>
+</div>
+
+<div id="ranking" [style.display]="displayRanking">
+    <p>Puntuacion final: {{puntuacion}}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre</th>
+                <th>Puntuacion</th>
+              </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-registro [ngForOf]="rankings" let-i="index">
+               <tr>
+                <td>{{i+1}}</td>
+                <td>{{registro.nombre}}</td>
+                <td>{{registro.puntos}}</td>
+               </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
