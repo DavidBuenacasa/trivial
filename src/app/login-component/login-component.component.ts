@@ -18,5 +18,7 @@ export class LoginComponentComponent {
     const password:string =form.value.password;
 
     this.loginService.login(email,password);
+
+    console.log(this.loginService.getIdToken());
   }
 }

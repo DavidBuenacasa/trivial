@@ -122,9 +122,7 @@ export class JuegoComponentComponent {
       this.opcion4=this.opcionesArray[3]
 
       this.preguntas.splice(index,1)
-
-
-
+      
     }else{ //SI no quedan preguntas se acaba el juego
       this.finJuego();
     }

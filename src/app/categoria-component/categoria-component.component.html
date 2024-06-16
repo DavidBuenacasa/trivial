@@ -15,7 +15,7 @@
         
         <div class="grid mt-4">
             <div *ngFor="let categoria of getCategorias(); let i=index">
-                <a class="card education" (click)="categoriaClicked(categoria)">
+                <a class="card education" (click)="categoriaClicked(categoria,i)">
                     <div class="overlay"></div>
                  <div class="circle">
                  </div>

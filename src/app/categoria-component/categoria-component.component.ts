@@ -40,23 +40,24 @@ export class CategoriaComponentComponent {
     this.modoEdicion=!this.modoEdicion;
   }
 
-  categoriaClicked(i:Categoria){
+  categoriaClicked(categoria:Categoria,i:number){
 
     console.log()
 
 
-    let categoria: NavigationExtras = {
+    let categoriaSelected: NavigationExtras = {
       queryParams: {
-          "nombre": i.nombre,
-          "preguntas":JSON.stringify(i.preguntas),
-          "ranking":JSON.stringify(i.ranking)
+          "index":i,
+          "nombre": categoria.nombre,
+          "preguntas":JSON.stringify(categoria.preguntas),
+          "ranking":JSON.stringify(categoria.ranking)
       }
   };
 
     if(this.getModoEdicion()){
-      this.router.navigate(["/modificarCat"],categoria);
+      this.router.navigate(["/modificarCat"],categoriaSelected);
     }else{
-      this.router.navigate(["/juego"],categoria);
+      this.router.navigate(["/juego"],categoriaSelected);
     }
 
   }

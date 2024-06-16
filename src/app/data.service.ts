@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, untracked } from "@angular/core";
 import { response } from "express";
 import { error } from "console";
 import { LoginService } from "./login-component/login.service";
@@ -24,5 +24,14 @@ export class DataServices{
         );
     }
 
+    actualizarCategoria(index:number, categoria:Categoria){
 
+        let url='https://trivial-1653f-default-rtdb.europe-west1.firebasedatabase.app/categoria'+index+'.json';
+
+        this.httpClient.put(url,categoria).subscribe(
+            response=>console.log("Se ha actualizado el registro " +  response),
+            error=> console.log("Error" + error),
+        );
+
+    }
 }

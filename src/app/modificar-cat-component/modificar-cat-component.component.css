@@ -13,6 +13,23 @@ a {
 }
 
 
+#pregunta-row{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+#pregunta-button{
+  width: 100%;
+}
+
+#trashIcon{
+  width: 30px;
+}
+
+
 
 .button-div{
   display: flex;
@@ -268,7 +285,6 @@ form .question input[type="text"]:valid ~ label {
   transform: translate(5px, -35px) scale(0.6);
 }
 
-
 #no-image{
   width: 250px;
 }
@@ -276,3 +292,6 @@ form .question input[type="text"]:valid ~ label {
 #addPregunta{
   width: 40px;
 }
+
+
+

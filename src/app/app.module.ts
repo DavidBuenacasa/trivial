@@ -15,6 +15,10 @@ import { JuegoComponentComponent } from './juego-component/juego-component.compo
 import { DataServices } from './data.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 
 const appRoutes:Routes=[
@@ -41,6 +45,8 @@ const appRoutes:Routes=[
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     MatRadioModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [
     LoginService,

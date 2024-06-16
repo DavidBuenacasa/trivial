@@ -12,7 +12,7 @@ export class Categoria{
     ranking:Ranking[];
     
 
-    constructor(nombre:string,preguntas:Pregunta[]) {
+    public constructor(nombre:string,preguntas:Pregunta[]) {
         this.nombre=nombre;
         this.preguntas=preguntas;
         this.ranking=[]

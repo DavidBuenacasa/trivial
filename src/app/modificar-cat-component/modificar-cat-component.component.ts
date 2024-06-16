@@ -3,6 +3,7 @@ import { Categoria } from '../categoria.model';
 import { Pregunta } from '../pregunta.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DataServices } from '../data.service';
+import { Ranking } from '../ranking.model';
 
 type Dictionary = {
   [key: string]: boolean;
@@ -27,9 +28,17 @@ export class ModificarCatComponentComponent {
    cambios:Boolean=false;
 
   public preguntas:Pregunta[];
+  private rankings:Ranking[];
+
+  private index:number=-1;
+
+  private categoria:Categoria;
+
+    //Opiones pregunta en
+    opcionesArray:string[];
 
 
-  constructor(private router:Router,private route: ActivatedRoute){
+  constructor(private router:Router,private route: ActivatedRoute, private dataService:DataServices){
     this.pregunta="";
     this.opciones={};
     this.opcion1="";
@@ -37,16 +46,21 @@ export class ModificarCatComponentComponent {
     this.opcion3="";
     this.opcion4="";
 
+    this.opcionesArray=[]
 
     this.preguntas=[];
-
+    this.rankings=[]
     this.nombre="";
+
+    this.categoria=new Categoria(this.nombre,this.preguntas);
+
+
 
     this.route.queryParams.subscribe(params => {
       this.nombre = params["nombre"];
+      this.index = params["index"]
       this.preguntas = JSON.parse(params["preguntas"]);
   });
-
 
   }
 
@@ -89,6 +103,15 @@ export class ModificarCatComponentComponent {
 
     //Rellenar opciones
 
+    for (let key in this.opciones) {
+      this.opcionesArray.push(key)
+    }
+
+    this.opcion1=this.opcionesArray[0]
+    this.opcion2=this.opcionesArray[1]
+    this.opcion3=this.opcionesArray[2]
+    this.opcion4=this.opcionesArray[3]
+
     
   }
 
@@ -112,7 +135,15 @@ export class ModificarCatComponentComponent {
     this.preguntas.push(pregunta);
   }
 
+
   guardarButton(){
+
+    this.categoria.nombre = "Prueba";
+    this.categoria.preguntas=this.preguntas;
+    //this.categoria.ranking=this.rankings;
+
+    this.dataService.actualizarCategoria(this.index,this.categoria)
+
     this.router.navigate(["/categoria"])
   }
 
@@ -120,4 +151,10 @@ export class ModificarCatComponentComponent {
 
     this.router.navigate(["/categoria"])
   }
+
+  eliminarPregunta(index:number){
+    this.preguntas.splice(index,1)
+  }
 }
+
+
