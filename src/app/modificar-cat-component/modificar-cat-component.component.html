@@ -1,5 +1,7 @@
 <div class="container">
   <div class="main-title mt-5 mb-2">Modificar categoria</div>
+
+  <!-- Categoria Nombre y foto -->
   <div class="categoria-profile">
     <div id="no-image-container">
       <img src="assets/img/no-image2.png" id="no-image" />
@@ -13,9 +15,11 @@
     </form>
   </div>
 
+  <!-- Añadir Pregunta -->
 
   <div class="wrapper container">
-    <div class="mb-3">
+
+    <div class="mb-3" >
       <div class="main-title">Preguntas</div>
       <a class="align-content-center" (click)="addPregunta()">
         <img src="assets/icon/add.png" id="addPregunta" />
@@ -23,88 +27,17 @@
     </div>
 
     <!-- Por cada pregunta saldra un registro -->
-    <div *ngFor="let pregunta of preguntas; let i = index">
-      <div id="pregunta-row">
-        <div id="pregunta-button">
-          <input
-            type="radio"
-            id="{{ 'Pregunta ' + (i + 1) }}"
-            name="accordion"
-          />
-          <a
-            class="item"
-            for="radioYour Account"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseExample"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-            (click)="rellenarOpciones(i)"
-          >
-            <div class="title">{{ "Pregunta " + (i + 1) }}</div>
-          </a>
-        </div>
-        <div>
-          <button class="btn btn-danger" (click)="eliminarPregunta(i)">
-            <img src="assets/icon/mod-categoria/trash.svg" id="trashIcon" />
-          </button>
-        </div>
-      </div>
-      
-    </div>
-    <div class="collapse" id="collapseExample">
-      <form class="">
-        <div class="form-group mb-4">
-          <h1>Pregunta</h1>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-            [(ngModel)]="pregunta"
-            name="pregunta"
-          ></textarea>
-        </div>
-        <h1>Opciones</h1>
-  
-        <mat-radio-group aria-label="options" class="gap-3">
-          <div class="pregunta-button mb-3">
-            <mat-radio-button value="opcion1"></mat-radio-button>
-            <div class="question">
-              <input type="text" required [(ngModel)]="opcion1" name="opcion1" />
-              <label>Opcion 1</label>
-            </div>
-          </div>
-  
-          <div class="pregunta-button mb-3">
-            <mat-radio-button></mat-radio-button>
-            <div class="question">
-              <input type="text" required [(ngModel)]="opcion2" name="opcion2" />
-              <label>Opcion 2</label>
-            </div>
-          </div>
-  
-          <div class="pregunta-button mb-3">
-            <mat-radio-button></mat-radio-button>
-            <div class="question">
-              <input type="text" required [(ngModel)]="opcion3" name="opcion3" />
-              <label>Opcion 3</label>
-            </div>
-          </div>
-  
-          <div class="pregunta-button mb-3">
-            <mat-radio-button></mat-radio-button>
-            <div class="question">
-              <input type="text" required [(ngModel)]="opcion4" name="opcion4" />
-              <label>Opcion 4</label>
-            </div>
-          </div>
-        </mat-radio-group>
-  
-        <button (click)="guardarPregunta()">Guardar Pregunta</button>
-      </form>
-    </div>
-  </div>
+
+
+    <app-pregunta-row-component *ngFor="let pregunta of preguntas; let i = index" [i]="i" [preguntaObject]="pregunta" (borrar)="eliminarPregunta($event)">
+
+    </app-pregunta-row-component>
+
+  <!-- Guardar y Cancelar -->
   <div class="button-div mt-5">
     <button class="btn btn-primary" (click)="guardarButton()">Guardar</button>
+
+    <!-- Al pulsar el boton cancelar saltara un pop up pidiendo confirmacion y sugiriendo guardar los datos-->
     <button
       class="btn btn-primary"
       type="button"
@@ -117,7 +50,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal de confirmacion-->
 <div
   class="modal fade"
   id="cancelarModal"

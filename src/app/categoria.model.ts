@@ -20,9 +20,16 @@ export class Categoria{
     }
 
 
-    cargarPreguntas(){
-
+    setNombre(name:string){
+      this.nombre=name
     }
+
+    setPreguntas(preguntas:Pregunta[]){
+      this.preguntas=preguntas
+    }
+
+
+
 
     private toObject() {
         return {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import firebase from 'firebase/compat/app'
+import firebase from 'firebase/compat/app';
+import { LoginService } from './login-component/login.service';
 
 
 @Component({
@@ -9,26 +10,54 @@ import firebase from 'firebase/compat/app'
 })
 export class AppComponent {
   title = 'trivial';
+  volumeSound:number = 40;
+
+  stateButtonLink:string="flex";
+  stateButtonDropdown:string="none";
+
+   mensajeToast:string=""
+   tituloToast:string=""
+
+  constructor(private loginService:LoginService){}
   ngOnInit(): void {
 
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
-    const firebaseConfig = {
+    
+    //Inicializa la base de datos
+    firebase.initializeApp({
       apiKey: "AIzaSyD-KqHfZRk7DxphuV519-jkESF4jiPVWvQ",
       authDomain: "trivial-1653f.firebaseapp.com",
-      databaseURL: "https://trivial-1653f-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "trivial-1653f",
-      storageBucket: "trivial-1653f.appspot.com",
-      messagingSenderId: "818827446105",
-      appId: "1:818827446105:web:62fd205e659cb5e17aee48",
-      measurementId: "G-3TB3RFT1Q3"
-    };
-    
-    firebase.initializeApp(firebaseConfig)
+    })
+    this.isLogin()
+  }
 
+  //Hace el Logout
 
+  logout(){
+    this.loginService.logout();
+    this.notLogin();
+  }
 
-    
+  //Si no esta loggeado aparece el buttonLink
+
+  notLogin(){
+    this.stateButtonDropdown="none"
+    this.stateButtonLink="flex"
+  }
+
+  //SI esta loggeado aparece el buttonDropdown
+
+  login(){
+    this.stateButtonDropdown="flex"
+    this.stateButtonLink="none"
+  }
+
+  //Al cargar se ejecuta para determinar la apariencia del boton
+
+  isLogin(){
+    if(this.loginService.islogged()){
+      this.login();
+    }else{
+      this.notLogin();
+    }
   }
 }

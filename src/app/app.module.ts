@@ -17,7 +17,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-
+import { LoginGuardian } from './login-component/login-guardian';
+import { CookieService } from 'ngx-cookie-service';
+import { PreguntaRowComponentComponent } from './pregunta-row-component/pregunta-row-component.component';
+import { ToastService } from './toast.service';
 
 
 
@@ -25,7 +28,7 @@ const appRoutes:Routes=[
   {path:"",component:InicioComponentComponent},
   {path:"login",component:LoginComponentComponent},
   {path:"categoria",component:CategoriaComponentComponent},
-  {path:"modificarCat",component:ModificarCatComponentComponent},
+  {path:"modificarCat",component:ModificarCatComponentComponent, canActivate:[LoginGuardian]},
   {path:"juego",component:JuegoComponentComponent},
 ]
 
@@ -37,6 +40,7 @@ const appRoutes:Routes=[
     CategoriaComponentComponent,
     ModificarCatComponentComponent,
     JuegoComponentComponent,
+    PreguntaRowComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,9 @@ const appRoutes:Routes=[
     LoginService,
     DataServices,
     provideAnimationsAsync(),
+    LoginGuardian,
+    CookieService,
+    ToastService
   ],
   bootstrap: [AppComponent]
 })

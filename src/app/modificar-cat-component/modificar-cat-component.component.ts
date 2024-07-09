@@ -16,16 +16,11 @@ type Dictionary = {
 })
 export class ModificarCatComponentComponent {
 
-   public nombre:string;
+  public nombre:string;
 
-   pregunta:string;
-   opciones:Dictionary;
-   opcion1:string;
-   opcion2:string;
-   opcion3:string;
-   opcion4:string;
+  opciones:Dictionary={};
 
-   cambios:Boolean=false;
+  cambios:Boolean=false;
 
   public preguntas:Pregunta[];
   private rankings:Ranking[];
@@ -34,19 +29,8 @@ export class ModificarCatComponentComponent {
 
   private categoria:Categoria;
 
-    //Opiones pregunta en
-    opcionesArray:string[];
-
 
   constructor(private router:Router,private route: ActivatedRoute, private dataService:DataServices){
-    this.pregunta="";
-    this.opciones={};
-    this.opcion1="";
-    this.opcion2="";
-    this.opcion3="";
-    this.opcion4="";
-
-    this.opcionesArray=[]
 
     this.preguntas=[];
     this.rankings=[]
@@ -74,86 +58,42 @@ export class ModificarCatComponentComponent {
     return this.nombre
   }
 
-  getOpcion1(){
-    return this.opcion1;
-  }
-
-  getOpcion2(){
-    return this.opcion2;
-  }
-
-  getOpcion3(){
-    return this.opcion3;
-  }
-
-  getOpcion4(){
-    return this.opcion4;
-  }
-  
-
-  rellenarOpciones(i:number){
-
-    //Cuando se despliegue una pregunta se rellenara los valores
-
-    let preguntaSelected:Pregunta=<Pregunta>this.preguntas.at(i)
-
-    this.pregunta=preguntaSelected.pregunta;
-
-    this.opciones= preguntaSelected.opciones;
-
-    //Rellenar opciones
-
-    for (let key in this.opciones) {
-      this.opcionesArray.push(key)
-    }
-
-    this.opcion1=this.opcionesArray[0]
-    this.opcion2=this.opcionesArray[1]
-    this.opcion3=this.opcionesArray[2]
-    this.opcion4=this.opcionesArray[3]
-
-    
-  }
-
-  guardarPregunta(){
-
-
-
-
-  }
-
-  addPregunta(){
-    let opciones: Dictionary = {};
-
-    opciones[this.opcion1] = false;
-    opciones[this.opcion2] = false;
-    opciones[this.opcion3] = false;
-    opciones[this.opcion4] = false;
-
-    let pregunta:Pregunta=new Pregunta(this.pregunta,opciones)
-
-    this.preguntas.push(pregunta);
-  }
-
+  //Al guardar se recogen todos los datos y se envian al dataService para guardar los datos
 
   guardarButton(){
 
-    this.categoria.nombre = "Prueba";
-    this.categoria.preguntas=this.preguntas;
-    //this.categoria.ranking=this.rankings;
+    this.categoria.setNombre(this.nombre)
+    this.categoria.setPreguntas(this.preguntas)
+
+    console.log(this.categoria)
 
     this.dataService.actualizarCategoria(this.index,this.categoria)
 
     this.router.navigate(["/categoria"])
   }
 
+  //Se vuelve al menu anterior
+
   cancelarButton(){
 
     this.router.navigate(["/categoria"])
   }
 
-  eliminarPregunta(index:number){
-    this.preguntas.splice(index,1)
+  //Se añade una nueva pregunta vacia al array
+
+  addPregunta(){
+
+    let opciones: Dictionary = {};
+
+    let pregunta:Pregunta=new Pregunta("",opciones)
+    this.preguntas.push(pregunta);
+  }
+
+
+  //Se elimina la pregunta del Array preguntas
+
+  eliminarPregunta(i:number){
+    this.preguntas.splice(i,1)
   }
 }
 

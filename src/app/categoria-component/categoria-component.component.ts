@@ -21,8 +21,6 @@ export class CategoriaComponentComponent {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
 
     this.rellenarDatos();
     
@@ -40,10 +38,10 @@ export class CategoriaComponentComponent {
     this.modoEdicion=!this.modoEdicion;
   }
 
+  //Al hacer click sobre la categoria se recogen los datos 
+  //y se carga el menu correspondiente
+
   categoriaClicked(categoria:Categoria,i:number){
-
-    console.log()
-
 
     let categoriaSelected: NavigationExtras = {
       queryParams: {
@@ -52,7 +50,10 @@ export class CategoriaComponentComponent {
           "preguntas":JSON.stringify(categoria.preguntas),
           "ranking":JSON.stringify(categoria.ranking)
       }
-  };
+    };
+
+    //Si el modo edicion estaba activado se carga modificar categoria.
+    //Si no, inicia el juego
 
     if(this.getModoEdicion()){
       this.router.navigate(["/modificarCat"],categoriaSelected);
@@ -62,15 +63,10 @@ export class CategoriaComponentComponent {
 
   }
 
+  //Al iniciar el menu se llama al servicio dataService para consultar las categorias.
   rellenarDatos(){
-
     return this.dataService.cargarCategorias().subscribe(misCategorias=>{
       this.categorias=Object.values(misCategorias)
-      
-
   })
   }
-
-
-
 }

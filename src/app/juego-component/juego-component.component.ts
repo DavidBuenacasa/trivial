@@ -16,11 +16,6 @@ export class JuegoComponentComponent {
   title:string;
   pregunta:string;
 
-  opcion1:string;
-  opcion2:string;
-  opcion3:string;
-  opcion4:string;
-
   //Pregunta click
 
   preguntaSelected:Pregunta;
@@ -28,6 +23,7 @@ export class JuegoComponentComponent {
 
   //Opiones pregunta en
   opcionesArray:string[];
+
 
   puntuacion:number;
   rankings:Ranking[];
@@ -44,11 +40,6 @@ export class JuegoComponentComponent {
     this.pregunta="Prueba de pregunta"
 
     this.preguntaSelected=new Pregunta("",{})
-
-    this.opcion1="";
-    this.opcion2="";
-    this.opcion3="";
-    this.opcion4="";
 
     this.puntuacion=0;
     this.rankings=[]
@@ -116,11 +107,6 @@ export class JuegoComponentComponent {
         this.opcionesArray.push(key)
       }
 
-      this.opcion1=this.opcionesArray[0]
-      this.opcion2=this.opcionesArray[1]
-      this.opcion3=this.opcionesArray[2]
-      this.opcion4=this.opcionesArray[3]
-
       this.preguntas.splice(index,1)
       
     }else{ //SI no quedan preguntas se acaba el juego
@@ -132,7 +118,6 @@ export class JuegoComponentComponent {
     this.puntuacion=0;
 
     this.newPregunta();
-
   }
 
   finJuego(){
@@ -142,18 +127,21 @@ export class JuegoComponentComponent {
 
   }
 
+  setRanking(){
+    
+  }
+
   preguntaClicked(event:Event){
 
     let respuesta;
     let correcto:boolean;
+    let opcionesSelected; 
 
     respuesta = (<HTMLButtonElement>event.target).value
 
-    correcto = true
+    opcionesSelected=this.preguntaSelected.opciones
 
-    console.log(this.preguntaSelected)
-
-    console.log(correcto)
+    correcto=opcionesSelected[respuesta]
 
     if(correcto){
       this.preguntaAcertada()
@@ -173,6 +161,10 @@ export class JuegoComponentComponent {
 
   }
 
+  finDeTiempo(){
+
+  }
+
   sumarPuntuacion(time:number){
 
     this.puntuacion=this.puntuacion + time*2 +10;
@@ -186,31 +178,7 @@ export class JuegoComponentComponent {
     
   }
 
-  timer(sec:number) {
-    // let minute = 1;
-    let seconds: number = sec;
-    let textSec: any = "0";
-    let statSec: number = 30;
-
-    const prefix = sec < 10 ? "0" : "";
-
-    const timer = setInterval(() => {
-      seconds--;
-      if (statSec != 0) statSec--;
-
-
-      if (statSec < 10) {
-        textSec = "0" + statSec;
-      } else textSec = statSec;
-
-      this.displayTimer = seconds
-
-      if (seconds == 0) {
-        console.log("finished");
-        clearInterval(timer);
-      }
-    }, 1000);
-  }
+ 
 }
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

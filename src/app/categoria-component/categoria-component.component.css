@@ -8,14 +8,6 @@
     padding-top: 10px;
 }
 
-@media (max-width: 526px){
-    .grid{
-        background-color: #4c5656;
-        justify-content: center;
-        
-    }
-}
-
 #add-icon{
     display: flex;
     width: 60px;
@@ -34,10 +26,13 @@ a {
     
 }
 
-
+h2{
+  font-size: 40px;
+}
 
 .categoria-menu{
     display: flex;
+    align-items: center;
 }
 
 /*CATEGORIAS*/

@@ -13,12 +13,12 @@ export class LoginComponentComponent {
 
   }
 
+  //Al enviar el formulario de login se recogen los datos y se envian al loginService para validarlos
+
   login(form:NgForm){
     const email:string =form.value.email;
     const password:string =form.value.password;
 
     this.loginService.login(email,password);
-
-    console.log(this.loginService.getIdToken());
   }
 }

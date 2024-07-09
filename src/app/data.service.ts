@@ -4,11 +4,12 @@ import { response } from "express";
 import { error } from "console";
 import { LoginService } from "./login-component/login.service";
 import { Categoria } from "./categoria.model";
+import { ToastService } from "./toast.service";
 
 @Injectable()
 export class DataServices{
 
-    constructor(private httpClient:HttpClient,private loginService:LoginService){
+    constructor(private httpClient:HttpClient,private loginService:LoginService, private toast:ToastService){
 
     }
 
@@ -19,18 +20,20 @@ export class DataServices{
     guardarCategoria(categorias:Categoria[]){
         const token=this.loginService.getIdToken();
         this.httpClient.put("https://trivial-1653f-default-rtdb.europe-west1.firebasedatabase.app/categoria.json",categorias).subscribe(
-            response=>console.log("Se han guardado los empleados " +  response),
-            error=> console.log("Error" + error),
+            response=>this.toast.showToastSaveData(),
+            error=> this.toast.showToastSaveDataError(),
         );
     }
 
     actualizarCategoria(index:number, categoria:Categoria){
 
-        let url='https://trivial-1653f-default-rtdb.europe-west1.firebasedatabase.app/categoria'+index+'.json';
+        const token=this.loginService.getIdToken();
+
+        let url='https://trivial-1653f-default-rtdb.europe-west1.firebasedatabase.app/categorias/'+index+'.json?auth=' + token ;
 
         this.httpClient.put(url,categoria).subscribe(
-            response=>console.log("Se ha actualizado el registro " +  response),
-            error=> console.log("Error" + error),
+            response=>this.toast.showToastSaveData(),
+            error=> this.toast.showToastSaveDataError(),
         );
 
     }

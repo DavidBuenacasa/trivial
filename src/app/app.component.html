@@ -1,2 +1,168 @@
+<nav class="navbar navbar-expand-lg bg-info">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item m-auto">
 
+          <!-- Home Button -->
+          <a href="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+              class="bi bi-house-door-fill" viewBox="0 0 16 16">
+              <path
+                d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Botones -->
+      <div class="d-flex">
+        <!-- Boton Link -->
+        <a href="/login" id="login-link" [ngStyle]="{'display': stateButtonLink}">
+          <button type="button" class="btn btn-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+              <path fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+            Iniciar Sesion
+          </button>
+        </a>
+
+        <!-- Boton Dropdown -->
+
+        <div class="btn-group d-flex align-content-end" >
+          <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" id="login-dropdown"
+            aria-expanded="false" [ngStyle]="{'display': stateButtonDropdown}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+              <path fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+            Iniciar Sesion
+          </button>
+  
+          <!-- Menu Dropdown -->
+  
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item a" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar Sesion
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>
+
+
+<!-- Toast Exito -->
+
+
+<!-- Toast LoginCorrect -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="loginCorrect" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="assets/icon/toast/check.png" class="rounded me-2 imgToast" alt="...">
+      <strong class="me-auto">Sesion iniciada con exito</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Logout -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="logout" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="assets/icon/toast/check.png" class="rounded me-2 imgToast" alt="...">
+      <strong class="me-auto">Sesion cerrada con exito</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast SaveData -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="saveData" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="assets/icon/toast/check.png" class="rounded me-2 imgToast" alt="...">
+      <strong class="me-auto">Datos guardados con exito</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+
+    <div class="toast-body">
+      Los cambios pueden tardar unos minutos en actualizarse.
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast Error -->
+
+
+<!-- Toast ErrorLogin -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="errorLogin" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="assets/icon/toast/error.png" class="rounded me-2 imgToast" alt="...">
+      <strong class="me-auto">Error al iniciar sesion</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Compruebe que su correo y contraseña sean correctos.
+    </div>
+  </div>
+</div>
+
+
+<!-- Toast SaveDataError -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="saveDataError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="assets/icon/toast/error.png" class="rounded me-2 imgToast" alt="...">
+      <strong class="me-auto">Error al guardar los datos</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+
+    <div class="toast-body">
+      Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde.
+    </div>
+  </div>
+</div>
+
+
+<!-- Navbar fixed bottom-->
+
+<nav class="navbar fixed-bottom  bg-transparent">
+  <div class="container-fluid">
+
+    <!-- Boton Sonido -->
+
+    <div class="d-flex flex-column">
+      <button class="border-0 bg-transparent" id="sound-button" data-bs-toggle="collapse"
+        data-bs-target="#soundCollapse" aria-expanded="false" aria-controls="soundCollapse">
+        <img src="assets/icon/inicio/sound.png" />
+      </button>
+
+      <input type="range" min="0" max="100" [(ngModel)]="volumeSound" step="5" id="sound-input" class="collapse"
+        id="soundCollapse" />
+    </div>
+
+  </div>
+</nav>
+
